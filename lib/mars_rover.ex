@@ -1,21 +1,4 @@
 defmodule MarsRover do
-  @moduledoc """
-  Documentation for MarsRover.
-  """
-
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> MarsRover.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
-
   def new(x, y, direction) do
     {x, y, direction}
   end
@@ -24,10 +7,21 @@ defmodule MarsRover do
     rover
   end
 
-  def forward({x, y, :east}) do
-    {x + 1, y, :east}
+  def forward({x, y, direction}) do
+    case direction do
+      :east -> {x + 1, y, :east}
+      :north -> {x, y + 1, :north}
+      :west -> {x - 1, y, :west}
+      :south -> {x, y - 1, :south}
+    end
   end
-  def forward({x, y, :north}) do
-    {x, y + 1, :north}
+
+  def backward({x, y, direction}) do
+    case direction do
+      :east -> {x - 1, y, :east}
+      :north -> {x, y - 1, :north}
+      :west -> {x + 1, y, :west}
+      :south -> {x, y + 1, :south}
+    end
   end
 end
